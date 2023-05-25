@@ -26,6 +26,13 @@ Route::get('/', function () {
     ]);
 });
 
+// Admin dashboard route
+Route::prefix('admin')->middleware('auth:admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
+
+
+// User dashboard route
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware('auth')->name('dashboard');
@@ -36,9 +43,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Admin dashboard route
-Route::prefix('admin')->middleware('auth:admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-});
 
 require __DIR__ . '/auth.php';
