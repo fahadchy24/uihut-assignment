@@ -88,6 +88,24 @@ Run the database seeder
 
 ----------
 
+# Login Credentials
+
+For Admin login
+
+    http://localhost:8000/admin/login
+
+    Email: admin@admin.com
+    Password: password
+
+For General user
+
+    http://localhost:8000/login
+
+    Email: user@user.com
+    Password: password
+
+----------
+
 # Testing API
 
 Run the laravel development server
