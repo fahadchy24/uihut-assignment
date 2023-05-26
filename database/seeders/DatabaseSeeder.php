@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class
         ]);
 
-        Category::factory(10)->create();
+        Category::factory(5)->create();
 
         Product::factory()->count(5)
             ->has(ProductCategory::factory()->count(5))
