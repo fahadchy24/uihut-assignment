@@ -30,9 +30,10 @@ class AdminAuthenticatedSessionController extends Controller
      */
     public function store(AdminLoginRequest $request): RedirectResponse
     {
+
         $request->authenticate();
 
-        $request->session()->regenerate();
+        // dd($request->session()->regenerate());
 
         return redirect()->intended(RouteServiceProvider::ADMIN_HOME);
     }
@@ -48,6 +49,6 @@ class AdminAuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/admin/login');
     }
 }

@@ -12,6 +12,13 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\AdminAuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
+// Admin authentication routes
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminAuthenticatedSessionController::class, 'create'])->name('login');
+    Route::post('login', [AdminAuthenticatedSessionController::class, 'store'])->name('login.attempt');
+    Route::post('/logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
+
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -57,12 +64,4 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
-});
-
-
-// Admin authentication routes
-Route::prefix('admin')->group(function () {
-    Route::get('/login', [AdminAuthenticatedSessionController::class, 'create'])->name('admin.login');
-    Route::post('/login', [AdminAuthenticatedSessionController::class, 'store'])->name('admin.login.attempt');
-    Route::post('/logout', [AdminAuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
 });

@@ -17,6 +17,8 @@ use App\Http\Controllers\Admin\AdminController;
 |
 */
 
+require __DIR__ . '/auth.php';
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -27,7 +29,7 @@ Route::get('/', function () {
 });
 
 // Admin dashboard route
-Route::prefix('admin')->middleware('auth:admin')->group(function () {
+Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
@@ -42,6 +44,3 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-require __DIR__ . '/auth.php';
